@@ -1,5 +1,8 @@
-import { Course } from './../model/course';
 import { Component, OnInit } from '@angular/core';
+
+import { Course } from './../model/course';
+import { CoursesService } from './../services/courses.service';
+
 
 @Component({
   selector: 'app-courses',
@@ -8,17 +11,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CoursesComponent implements OnInit {
 
-  courses: Course[] = [
-    { _id: '1', name: 'Angular', category: 'front-end' },
-    { _id: '2', name: 'Spring', category: 'back-end' }
-  ];
+  courses: Course[] = [];
   displayedColumns = ['name', 'category'];
 
-  constructor() {
+  // coursesService: CoursesService;
+
+  constructor(private coursesService: CoursesService) {
     // this.courses = [];
+    // this.coursesService = new CoursesService();
+    // this.courses = this.coursesService.list();
   }
 
   ngOnInit(): void {
+    // deixando aqui, será feita a atribuição da lista de cursos apenas quando o componente for inicializado no html.
+    // não fará muita diferença deixando aqui ou no construtor, gosto pessoal.
+    this.courses = this.coursesService.list();
   }
 
 }
