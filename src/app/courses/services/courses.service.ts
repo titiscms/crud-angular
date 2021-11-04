@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { first, take, tap } from 'rxjs/operators';
+import { delay, first, take, tap } from 'rxjs/operators';
 
 import { Course } from './../model/course';
 
@@ -20,6 +20,8 @@ export class CoursesService {
       take(1),
       // Apresenta a primeira resposta e também finaliza a inscrição na origem de dados
       first(),
+      // Operador para atrasar a resposta em 5000 milisegundos
+      delay(5000),
       tap(courses => console.log(courses))
     );
   }
